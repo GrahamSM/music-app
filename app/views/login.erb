@@ -1,0 +1,32 @@
+<div class="page-header">
+	<h1>Login</h1>
+</div>
+<hr/>
+
+<% if @user && @user.errors.any? %>
+	<div class="panel panel-danger">
+		<div class="panel-heading">
+			<strong class="panel-title">Errors:</strong>
+		</div>
+		<ul class="list-group">
+			<% @user.errors.full_messages.each do |track| %>
+				<li class="list-group-item"><%= track %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+<form method="post" action="/login">
+	<div class="input-group" style="width:300px;">
+		<label>Username</label>
+		<input type="text" class="form-control" name="username">
+	</div>
+	<div class="input-group" style="width:300px;">
+		<label>Password:</label>
+		<input type="text" class="form-control" name="password">
+	</div>
+	<p></p>
+	<div class="input-group">
+		<button type="submit" class="btn btn-info">Submit</button>
+ 	</div>
+</form>

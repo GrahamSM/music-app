@@ -1,4 +1,4 @@
-<div class="page-header">
+<div class="jumbotron">
 	<h1>All tracks</h1>
 </div>
 <hr/>
@@ -16,14 +16,17 @@
 			<div class="row">
 				<div class="col-sm-8">
 				<%if track.url?%>
-					<%= track.url %>
 					<div class="embed-responsive embed-responsive-4by3"  width="300" height="100">
   					<iframe class="embed-responsive-item" src="<%= track.url %>"></iframe>
 					</div>
 				<%end%>
 			</div>
 		</div>
-			<h5>Post by: <%= track.author %></h5>
+		<%if (user = User.find_by(id: track.user_id)) %> 
+			<h5>Post by: <%= user.username %></h5>
+		<%else %>
+			<h5>Post by: Unknown</h5>
+		<%end%>
 			<small>Created at: <%=track.created_at%></small>
 			<hr/>
 		</div>

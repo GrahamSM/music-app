@@ -1,0 +1,40 @@
+<div class="page-header">
+	<h1>Signup</h1>
+</div>
+<hr/>
+
+<% if @user && @user.errors.any? %>
+	<div class="panel panel-danger">
+		<div class="panel-heading">
+			<strong class="panel-title">Errors:</strong>
+		</div>
+		<ul class="list-group">
+			<% @user.errors.full_messages.each do |track| %>
+				<li class="list-group-item"><%= track %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+<form method="post" action="/signup">
+	<div class="input-group" style="width:300px;">
+		<label>Username</label>
+		<input type="text" class="form-control" name="username">
+	</div>
+	<div class="input-group" style="width:300px;">
+		<label>Email:</label>
+		<input type="text" class="form-control" name="email">
+	</div>
+	<div class="input-group" style="width:300px;">
+		<label>Password:</label>
+		<input type="text" class="form-control" name="password">
+	</div>
+	<div class="input-group" style="width:300px;">
+		<label>Confirm password</label>
+		<input type="text" class="form-control" name="password_confirmation">
+	</div>
+	<p></p>
+	<div class="input-group">
+		<button type="submit" class="btn btn-info">Submit</button>
+ 	</div>
+</form>
