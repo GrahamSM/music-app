@@ -8,11 +8,13 @@
 			<p>
 				<%= track.url %>
 			</p>
-			<h5>Post by: <%= track.author %>
+			<h5>Post by: <%= track.author %></h5>
+			<hr/>
 		</div>
 	<% end %>
 <% else %>
 	<h3>You have no tracks at the moment!</h3>
 <% end %>
 <hr/>
-<a href="/">Home</a>
+<a href="/posts/new" class="btn btn-info" role="button">Post</a>
+<a href="/" class="btn btn-info" role="button">Home</a>

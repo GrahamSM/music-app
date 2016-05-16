@@ -1,13 +1,13 @@
 <h1><%= @track.title %></h1>
 
 <p>
-	Author: <%= @track.author %>
+	<strong>Author:</strong> <%= @track.author %>
 </p>
 
 <p>
-	<%= @track.url %>
+	<em><%= @track.url %></em>
 </p>
 
 <hr/>
-<a href="/posts">Back to All Tracks</a>
-<a href="/">Home</a>
+<a href="/posts" class="btn btn-info" role="button">Back to All Tracks</a>
+<a href="/" class="btn btn-info" role="button">Home</a>
