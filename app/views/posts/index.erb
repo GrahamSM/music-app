@@ -1,0 +1,18 @@
+<h1>All tracks</h1>
+<hr/>
+
+<% if @tracks %>
+	<% @tracks.each do |track| %>
+		<div class="post">
+			<h3><a href="/posts/<%= track.id %>"><%= track.title %></a> <small>(by: <%= track.artist %>)</small></h3>
+			<p>
+				<%= track.url %>
+			</p>
+			<h5>Post by: <%= track.author %>
+		</div>
+	<% end %>
+<% else %>
+	<h3>You have no tracks at the moment!</h3>
+<% end %>
+<hr/>
+<a href="/">Home</a>

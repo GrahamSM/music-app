@@ -1,0 +1,36 @@
+<h1>Post a Track!</h1>
+<hr/>
+
+<% if @track.errors.any? %>
+	<div>
+		<strong>Some issues with your track, please fix them:</strong>
+		<ul>
+			<% @track.errors.full_messages.each do |track| %>
+				<li><%= track %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+<form method="post" action="/posts">
+	<div>
+		<label>Author:</label>
+		<input type="text" name="author" value="<%= @track.author %>">
+	</div>
+	<div>
+		<label>Track title:</label>
+		<input type="text" name="title" value="<%= @track.title %>">
+	</div>
+	<div>
+		<label>Artist:</label>
+		<input type="text" name="artist" value="<%=@track.artist %>">
+	</div>
+	<div>
+		<label>URL:</label>
+		<input type="text" name="url" value="<%= @track.url %>">
+	</div>
+	<div>
+		<input type="submit" value="Submit">
+ 	</div>
+</form>
+<a href="/">Home</a>
