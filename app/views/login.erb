@@ -16,6 +16,18 @@
 	</div>
 <% end %>
 
+<% if !current_user %>
+<div class="panel panel-warning">
+  <div class="panel-heading">
+    <strong class="panel-title">Oops!</strong>
+  </div>
+      <ul class="list-group">
+        <li class="list-group-item">Please log in first!</li>
+      </ul>
+</div>
+<% end %>
+
+
 <form method="post" action="/login">
 	<div class="input-group" style="width:300px;">
 		<label>Username</label>

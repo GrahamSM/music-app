@@ -22,8 +22,9 @@
 				<%end%>
 			</div>
 		</div>
-		<%if (user = User.find_by(id: track.user_id)) %> 
+		<%if (user = User.find_by(id: track.user_id)) %>
 			<h5>Post by: <%= user.username %></h5>
+			<h5>Number of posts by this user: <%= user.tracks.count %></h5>
 		<%else %>
 			<h5>Post by: Unknown</h5>
 		<%end%>

@@ -7,7 +7,7 @@ helpers do
 end
 
 get '/' do
-  redirect '/login' unless current_user
+  erb :login unless current_user
   erb :index
 end
 
@@ -16,6 +16,11 @@ get '/signup' do
 end
 
 get '/login' do
+  erb :'login'
+end
+
+get '/logout' do
+  session.clear
   erb :'login'
 end
 
