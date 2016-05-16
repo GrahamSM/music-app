@@ -5,6 +5,10 @@ end
 
 get '/posts' do
 	@tracks = Track.all
+  @tracks.each do |track|
+    new_url = track.url.sub('watch?v=', 'embed/')
+    track.url = new_url
+  end
 	erb :'posts/index'
 end
 

@@ -1,14 +1,30 @@
-<h1>All tracks</h1>
+<div class="page-header">
+	<h1>All tracks</h1>
+</div>
 <hr/>
 
 <% if @tracks %>
 	<% @tracks.each do |track| %>
 		<div class="post">
-			<h3><a href="/posts/<%= track.id %>"><%= track.title %></a> <small>(by: <%= track.artist %>)</small></h3>
-			<p>
-				<%= track.url %>
-			</p>
+			<h3><a href="/posts/<%= track.id %>"><%= track.title %></a>
+				<% if track.artist%>
+					<small>(by: <%= track.artist %>)</small>
+				<% else %>
+					<small>(artist unknown)</small>
+				<%end%>
+			</h3>
+			<div class="row">
+				<div class="col-sm-8">
+				<%if track.url?%>
+					<%= track.url %>
+					<div class="embed-responsive embed-responsive-4by3"  width="300" height="100">
+  					<iframe class="embed-responsive-item" src="<%= track.url %>"></iframe>
+					</div>
+				<%end%>
+			</div>
+		</div>
 			<h5>Post by: <%= track.author %></h5>
+			<small>Created at: <%=track.created_at%></small>
 			<hr/>
 		</div>
 	<% end %>
@@ -16,5 +32,7 @@
 	<h3>You have no tracks at the moment!</h3>
 <% end %>
 <hr/>
-<a href="/posts/new" class="btn btn-info" role="button">Post</a>
+<a href="posts/new" class="btn btn-info">
+	<span class="glyphicon glyphicon-plus"></span> Post
+</a>
 <a href="/" class="btn btn-info" role="button">Home</a>
