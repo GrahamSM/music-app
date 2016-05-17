@@ -1,11 +1,8 @@
 # Homepage (Root path)
-enable :sessions
 helpers do
   def current_user
     User.find_by(id: session[:user_id])
   end
-
-
 end
 
 get '/' do
@@ -21,40 +18,15 @@ get '/login' do
   erb :'login'
 end
 
-get '/logout' do
-  session.clear
-  erb :'login'
-end
-
-get '/upvote/:id' do
-  @track = Track.find params[:id]
-  binding.pry
-  @track.num_votes += 1
-  @track.save
-  redirect '/posts'
-end
-
-get '/posts' do
-  redirect '/login' unless current_user
-	@tracks = Track.all
-  @tracks.each do |track|
-    new_url = track.url.sub('watch?v=', 'embed/')
-    track.url = new_url
+post '/login' do
+  @user = User.find_by(username: params[:username])
+  #TODO: Valuable error message!
+  if @user && @user.authenticate(params[:password])
+    session[:user_id] = @user.id
+    erb :'index'
+  else
+    erb :'login'
   end
-	erb :'posts/index'
-end
-
-get '/posts/new' do
-  redirect '/login' unless current_user
-	@track = Track.new
-	erb :'posts/new'
-end
-
-
-get '/posts/:id' do
-  redirect '/login' unless current_user
-	@track = Track.find params[:id]
-	erb :'posts/show'
 end
 
 post '/signup' do
@@ -71,20 +43,62 @@ post '/signup' do
   end
 end
 
-post '/login' do
-  @user = User.find_by(username: params[:username])
-  # username = params[:username]
-  # password = params[:password]
-  # password_confirmation = params[:password_confirmation]
-  if @user.authenticate(params[:password])
-    session[:user_id] = @user.id
-    erb :'index'
+post '/logout' do
+  session.clear
+  redirect '/'
+end
+
+post '/upvote/:id' do
+  #TODO: Error message if tried to
+  @track = Track.find params[:id]
+  upvote = Upvote.new(track_id: @track.id, user_id: current_user.id)
+  if upvote.save
+    @track.num_votes += 1
+  end
+  @track.save
+  redirect '/tracks'
+end
+
+post '/tracks/review/:id' do
+  #TODO: Error message if tried to
+  @track = Track.find params[:id]
+  erb :'tracks/review'
+end
+
+post '/review' do
+  #TODO: add track_id
+  @review = Review.new(content: params[:content], user_id: current_user.id, track_id: params[:track_id])
+  if @review.save
+    redirect '/tracks'
   else
-    erb :'login'
+    binding.pry
+    #TODO: Output errors if this happens
+    @tracks = Track.all.order(num_votes: :desc)
+  	erb :'tracks/index'
   end
 end
 
-post '/posts' do
+
+get '/tracks' do
+  redirect '/login' unless current_user
+	@tracks = Track.all.order(num_votes: :desc)
+	erb :'tracks/index'
+end
+
+
+get '/tracks/new' do
+  redirect '/login' unless current_user
+	@track = Track.new
+	erb :'tracks/new'
+end
+
+get '/tracks/:id' do
+  redirect '/login' unless current_user
+	@track = Track.find params[:id]
+	erb :'tracks/show'
+end
+
+post '/tracks' do
 	@track = Track.new(
 	title: params[:title],
   artist: params[:artist],
@@ -93,8 +107,8 @@ post '/posts' do
   user_id: session[:user_id]
 	)
 	if @track.save
-		redirect '/posts'
+		redirect '/tracks'
 	else
-		erb :'posts/new'
+		erb :'tracks/new'
 	end
 end

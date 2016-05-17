@@ -1,7 +1,12 @@
-<div class="page-header">
-	<h1>Post a Track</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="jumbotron">
+        <h1>Post a Track</h1>
+      </div>
+    </div>
+  </div>
 </div>
-<hr/>
 
 <% if @track.errors.any? %>
 	<div class="panel panel-danger">
@@ -16,18 +21,15 @@
 	</div>
 <% end %>
 
-<form method="post" action="/posts">
+<form method="post" action="/tracks">
 	<div class="input-group" style="width:300px;">
-		<label>Track title:</label>
-		<input type="text" class="form-control" name="title" value="<%= @track.title %>">
+		<input type="text" class="form-control" placeholder="Track title" name="title" value="<%= @track.title %>">
 	</div>
 	<div class="input-group" style="width:300px;">
-		<label>Artist:</label>
-		<input type="text" class="form-control" name="artist" value="<%=@track.artist %>">
+		<input type="text" class="form-control" placeholder="Artist's Name" name="artist" value="<%=@track.artist %>">
 	</div>
 	<div class="input-group" style="width:300px;">
-		<label>URL:</label>
-		<input type="text" class="form-control" name="url" value="<%= @track.url %>">
+		<input type="text" class="form-control" placeholder="URL" name="url" value="<%= @track.url %>">
 	</div>
 	<p></p>
 	<div class="input-group">

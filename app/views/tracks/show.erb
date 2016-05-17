@@ -1,0 +1,28 @@
+<h1><%= @track.title %> <small>By: <%= @track.artist %> </small></h1>
+
+<p>
+	<strong>Author:</strong> <%= @track.author %>
+</p>
+
+<p>
+	<em><%= @track.url %></em>
+</p>
+
+<hr/>
+<a href="/tracks" class="btn btn-info">
+	<span class="glyphicon glyphicon-music"></span> Back to all tracks
+</a>
+
+<hr/>
+<% if track_reviews = @track.get_all_reviews %>
+		<% track_reviews.each do |review| %>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title"><%= User.find_by(id: review.user_id).username %></h3>
+				</div>
+				<div class="panel-body">
+					<%= review.content %>
+				</div>
+			</div>
+		<% end %>
+<% end %>

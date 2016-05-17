@@ -1,7 +1,12 @@
-<div class="page-header">
-	<h1>Login</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="jumbotron">
+        <h1>Log In</h1>
+      </div>
+    </div>
+  </div>
 </div>
-<hr/>
 
 <% if @user && @user.errors.any? %>
 	<div class="panel panel-danger">
@@ -16,16 +21,16 @@
 	</div>
 <% end %>
 
-<% if !current_user %>
+<!-- <% if !current_user %>
 <div class="panel panel-warning">
   <div class="panel-heading">
-    <strong class="panel-title">Oops!</strong>
+    <strong class="panel-title"></strong>
   </div>
       <ul class="list-group">
         <li class="list-group-item">Please log in first!</li>
       </ul>
 </div>
-<% end %>
+<% end %> -->
 
 
 <form method="post" action="/login">
@@ -35,7 +40,7 @@
 	</div>
 	<div class="input-group" style="width:300px;">
 		<label>Password:</label>
-		<input type="text" class="form-control" name="password">
+		<input type="password" class="form-control" name="password">
 	</div>
 	<p></p>
 	<div class="input-group">

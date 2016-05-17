@@ -31,20 +31,32 @@
         <a href="/">Home</a>
       </li>
       <li>
-        <a href="/posts/new">Post a track</a>
+        <a href="/tracks/new">Post a track</a>
       </li>
       <li>
-        <a href="/posts">View all tracks</a>
+        <a href="/tracks">View all tracks</a>
       </li>
-      <li>
-        <a href="/login">Log In</a>
-      </li>
-      <li>
-        <a href="/signup">Sign Up</a>
-      </li>
-      <li>
-        <a href="/logout">Log Out</a>
-      </li>
+      <!--TODO: Only if not logged in and style button-->
+      <% if !current_user %>
+        <li>
+          <a href="/login">Log In</a>
+        </li>
+      <% end %>
+      <% if !current_user %>
+        <li>
+          <a href="/signup">Sign Up</a>
+        </li>
+      <% end %>
+      <!--TODO: Only if logged in and style button-->
+      <% if current_user %>
+        <li>
+          <form action="/logout" method = "post" class="navbar-form navbar-left">
+            <div class="form-group">
+              <input class="form-control" type="submit" value="Log Out">
+            </div>
+          </form>
+        </li>
+      <% end %>
     </ul>
   </div>
 </nav>

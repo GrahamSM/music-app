@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="jumbotron">
+        <h1>All Tracks</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<% if @review && @review.errors.any? %>
+	<div class="panel panel-danger">
+		<div class="panel-heading">
+			<strong class="panel-title">Some issues with your review:</strong>
+		</div>
+		<ul class="list-group">
+			<% @review.errors.full_messages.each do |review| %>
+				<li class="list-group-item"><%= review %></li>
+			<% end %>
+		</ul>
+	</div>
+<% end %>
+
+<% if @tracks %>
+	<% @tracks.each do |track| %>
+		<div class="post">
+			<h3><a href="/tracks/<%= track.id %>"><%= track.title %></a>
+					<small>(by: <%= track.artist %>)</small>
+			</h3>
+			<div class="row">
+				<div class="col-sm-8">
+				<%if track.url?%>
+					<div class="embed-responsive embed-responsive-4by3"  width="300" height="100">
+  					<iframe class="embed-responsive-item" src="<%= track.embeddable_url %>"></iframe>
+					</div>
+				<%end%>
+			</div>
+		</div>
+		<%if (user = User.find_by(id: track.user_id)) %>
+			<h5>Post by: <%= user.username %></h5>
+
+		<%else %>
+			<h5>Post by: Unknown</h5>
+		<%end%>
+		<!--TODO: form with button-->
+		<form action="/upvote/<%= track.id %>" method="post">
+			<button type="submit" class="btn btn-info">Upvote (<%=track.num_votes%>)</button>
+		</form>
+		<p></p>
+		<small>Created at: <%=track.created_at%></small>
+    <form action="tracks/review/<%= track.id %>" method="post">
+      <button type="submit" class="btn btn-info">Submit a Review</button>
+    </form>
+		<hr/>
+		</div>
+	<% end %>
+<% else %>
+	<h3>You have no tracks at the moment!</h3>
+<% end %>
+<hr/>
+<a href="tracks/new" class="btn btn-info">
+	<span class="glyphicon glyphicon-plus"></span> Post
+</a>
+<a href="/" class="btn btn-info" role="button">Home</a>
