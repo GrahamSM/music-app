@@ -4,6 +4,8 @@ helpers do
   def current_user
     User.find_by(id: session[:user_id])
   end
+
+
 end
 
 get '/' do
@@ -24,6 +26,14 @@ get '/logout' do
   erb :'login'
 end
 
+get '/upvote/:id' do
+  @track = Track.find params[:id]
+  binding.pry
+  @track.num_votes += 1
+  @track.save
+  redirect '/posts'
+end
+
 get '/posts' do
   redirect '/login' unless current_user
 	@tracks = Track.all
@@ -39,7 +49,6 @@ get '/posts/new' do
 	@track = Track.new
 	erb :'posts/new'
 end
-
 
 
 get '/posts/:id' do

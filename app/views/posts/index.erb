@@ -7,11 +7,7 @@
 	<% @tracks.each do |track| %>
 		<div class="post">
 			<h3><a href="/posts/<%= track.id %>"><%= track.title %></a>
-				<% if track.artist%>
 					<small>(by: <%= track.artist %>)</small>
-				<% else %>
-					<small>(artist unknown)</small>
-				<%end%>
 			</h3>
 			<div class="row">
 				<div class="col-sm-8">
@@ -28,8 +24,12 @@
 		<%else %>
 			<h5>Post by: Unknown</h5>
 		<%end%>
-			<small>Created at: <%=track.created_at%></small>
-			<hr/>
+		<a href="/upvote/<%= track.id %>" class="btn btn-info">
+			<span class="glyphicon glyphicon-plus"></span> Upvote (<%=track.num_votes%>)
+		</a>
+		<p></p>
+		<small>Created at: <%=track.created_at%></small>
+		<hr/>
 		</div>
 	<% end %>
 <% else %>
