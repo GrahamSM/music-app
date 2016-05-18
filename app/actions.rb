@@ -68,7 +68,6 @@ end
 post '/review' do
   #TODO: add track_id
   @review = Review.new(content: params[:content], user_id: current_user.id, track_id: params[:track_id], rating: params[:num].to_i)
-  binding.pry
   if @review.save
     redirect '/tracks'
   else

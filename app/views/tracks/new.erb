@@ -1,10 +1,6 @@
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="jumbotron">
-        <h1>Post a Track</h1>
-      </div>
-    </div>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-3">Post a track</h1>
   </div>
 </div>
 
@@ -26,7 +22,7 @@
 		<input type="text" class="form-control" placeholder="Track title" name="title" value="<%= @track.title %>">
 	</div>
 	<div class="input-group" style="width:300px;">
-		<input type="text" class="form-control" placeholder="Artist's Name" name="artist" value="<%=@track.artist %>">
+		<input type="text" class="form-control" placeholder="Artist's Name" name="artist">
 	</div>
 	<div class="input-group" style="width:300px;">
 		<input type="text" class="form-control" placeholder="URL" name="url" value="<%= @track.url %>">
