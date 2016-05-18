@@ -18,10 +18,22 @@
 		<% track_reviews.each do |review| %>
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<h3 class="panel-title"><%= User.find_by(id: review.user_id).username %></h3>
+					<h3 class="panel-title">
+						<%= User.find_by(id: review.user_id).username %>'s review
+					</h3>
+					<% if review.user_id == current_user.id %>
+						<form method="post" action="delete/review/<%=review.id%>">
+							<button type="submit" class="btn btn-danger" id="delete-button">Delete</button>
+						</form>
+					<% end %>
 				</div>
 				<div class="panel-body">
 					<%= review.content %>
+				</div>
+				<div class="panel-footer">
+					<% if review.rating %>
+						Rating: <%= review.rating %>
+					<% end %>
 				</div>
 			</div>
 		<% end %>

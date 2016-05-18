@@ -67,15 +67,20 @@ end
 
 post '/review' do
   #TODO: add track_id
-  @review = Review.new(content: params[:content], user_id: current_user.id, track_id: params[:track_id])
+  @review = Review.new(content: params[:content], user_id: current_user.id, track_id: params[:track_id], rating: params[:num].to_i)
+  binding.pry
   if @review.save
     redirect '/tracks'
   else
-    binding.pry
     #TODO: Output errors if this happens
     @tracks = Track.all.order(num_votes: :desc)
   	erb :'tracks/index'
   end
+end
+
+post '/tracks/delete/review/:id' do
+  Review.destroy(params[:id])
+  redirect '/tracks'
 end
 
 
@@ -97,6 +102,10 @@ get '/tracks/:id' do
 	@track = Track.find params[:id]
 	erb :'tracks/show'
 end
+
+# post '/tracks/review/rate/:id/:num' do
+#   binding.pry
+# end
 
 post '/tracks' do
 	@track = Track.new(

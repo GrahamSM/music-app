@@ -24,7 +24,16 @@
 <form method="post" action="/review">
   <input type="hidden" name="track_id" value="<%= @track.id %>"></input>
   <fieldset class="form-group">
-  <textarea class="form-control" id="exampleTextarea" name="content" rows="3"></textarea>
-  <button type="submit" class="btn btn-default">Submit</button>
-</fieldset>
+    <textarea class="form-control" id="exampleTextarea" name="content" rows="3"></textarea>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </fieldset>
+  <div class="dropdown">
+  <select name="num">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+  </select>
+</div>
 </form>
