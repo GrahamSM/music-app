@@ -38,7 +38,10 @@
   		  <h5>Post by: Unknown</h5>
   		<%end%>
   		<form action="/upvote/<%= track.id %>" method="post">
-  		    <button type="submit" class="btn btn-info">Upvote (<%=track.num_votes%>)</button>
+  		    <button type="submit" class="btn btn-info">
+            <span class="glyphicon glyphicon-plus"></span>
+          </button>
+          <span class="badge"><%= track.num_votes %></span>
   		</form>
   		<p></p>
       <form action="tracks/review/<%= track.id %>" method="post">
